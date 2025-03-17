@@ -4,7 +4,7 @@ return {
 		config = function()
 			vim.keymap.set("n", "<leader>[c", function()
 				require("treesitter-context").go_to_context(vim.v.count1)
-			end, { silent = true, desc = "Go to previous treesitter context" })
+			end, { silent = true, desc = "Go to treesitter context" })
 			vim.keymap.set("n", "<leader>[x", function()
 				require("treesitter-context").disable()
 			end, { silent = true, desc = "Disable treesitter context" })
@@ -22,11 +22,7 @@ return {
 		},
 		config = function()
 			local treesitter = require("nvim-treesitter.configs")
-			vim.filetype.add({
-				pattern = {
-					[".*%.blade%.php"] = "blade",
-				},
-			})
+
 			-- configure treesitter
 			treesitter.setup({ -- enable syntax highlighting
 				highlight = {
@@ -61,8 +57,6 @@ return {
 					"query",
 					"vimdoc",
 					"c",
-					"php",
-					"blade",
 				},
 				incremental_selection = {
 					enable = true,
@@ -74,16 +68,6 @@ return {
 					},
 				},
 			})
-
-			local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
-			parser_config.blade = {
-				install_info = {
-					url = "https://github.com/EmranMR/tree-sitter-blade",
-					files = { "src/parser.c" },
-					branch = "main",
-				},
-				filetype = "blade",
-			}
 		end,
 	},
 }

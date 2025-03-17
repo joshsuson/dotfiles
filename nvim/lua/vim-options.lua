@@ -1,9 +1,10 @@
+--Basic Settings
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=2")
 vim.cmd("set softtabstop=2")
 vim.cmd("set shiftwidth=2")
 vim.cmd("set relativenumber")
-
+vim.opt.number = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
 vim.opt.termguicolors = true
@@ -18,6 +19,7 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 vim.g.mapleader = " "
+vim.keymap.set("i", "jj", "<ESC>", { silent = true })
 -- Allows you to move highlighted lines up and down
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
@@ -38,7 +40,10 @@ vim.keymap.set({ "n", "v" }, "<leader>d", [["_d]])
 vim.keymap.set("n", "Q", "<nop>")
 -- Replaces the word you are currently on in the whole file
 vim.keymap.set("n", "<leader>rw", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
-
+-- Removes highlights after searching
+vim.keymap.set("n", "<leader>/", ":noh<cr>")
+-- Toggles search highlights back on
+vim.keymap.set("n", "<leader>h", ":set hls<cr>")
 -- Window management
 vim.keymap.set("n", "<leader>sv", "<C-w>v", { desc = "Split window vertically" }) -- split window vertically
 vim.keymap.set("n", "<leader>sh", "<C-w>s", { desc = "Split window horizontally" }) -- split window horizontally
@@ -52,5 +57,14 @@ vim.keymap.set("n", "<leader>tp", "<cmd>tabp<CR>", { desc = "Go to previous tab"
 vim.keymap.set("n", "<leader>tf", "<cmd>tabnew %<CR>", { desc = "Open current buffer in new tab" }) --  move current buffer to new tab
 
 -- Writing files
-vim.keymap.set({ "n", "v" }, "<leader>wf", "<cmd>w<CR>", { desc = "Write file" })
-vim.keymap.set({ "n", "v" }, "<leader>wa", "<cmd>w<CR>", { desc = "Write all files" })
+vim.keymap.set("n", "<leader>w", "<cmd>wa<CR>", { desc = "Write file" }) -- write file
+
+vim.keymap.set("n", "<leader>be", function()
+	require("telescope.builtin").buffers({
+		sort_mru = true,
+		initial_mode = "normal",
+		layout_config = {
+			preview_width = 0.45,
+		},
+	})
+end, { desc = "Buffer Explorer" })
