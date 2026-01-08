@@ -72,9 +72,7 @@ if [ ! -d ~/.config/nvim ]; then
 fi
 
 echo "📦 Installing OpenCode..."
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-npm install -g @opencode/cli
+curl -fsSL https://opencode.ai/install | bash
 
 echo "⚙️  Creating .tmux.conf configuration..."
 cat > ~/.tmux.conf << 'EOF'
