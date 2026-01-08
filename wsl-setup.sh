@@ -25,6 +25,7 @@ echo "📦 Installing nvm..."
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 nvm install --lts
 
 echo "📦 Installing zoxide..."
@@ -63,6 +64,8 @@ git clone https://github.com/LazyVim/starter ~/.config/nvim
 rm -rf ~/.config/nvim/.git
 
 echo "📦 Installing OpenCode..."
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 npm install -g @opencode/cli
 
 echo "⚙️  Creating .tmux.conf configuration..."
